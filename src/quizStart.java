@@ -361,8 +361,19 @@ public class quizStart {
 				
 				String user=UserText.getText();
 				int Uscore=0;
+				boolean entryExists=false;
 				UserInfo student=new UserInfo();
 				
+							
+				try {
+					entryExists=student.StudentExists(user);
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				if(entryExists)
+				{
 				try {
 					Uscore=student.GetStudentScore(user);
 				} catch (SQLException e1) {
@@ -371,7 +382,11 @@ public class quizStart {
 				}
 				
 				ResultLabel.setText(user+" Scored ="+Uscore);
+				}else {
+				
+				ResultLabel.setText("Invalid User!");
 
+				}
 			}
 		});
 		
